@@ -1,6 +1,12 @@
+body{
+  background-color: rgb(194, 191, 0);
+}
+
 #calc-container{
   background-color: rgb(0, 0, 0);
-  height: 550px;
+  border-radius: 8px;
+  box-shadow: 5px 10px #888888;
+  height: 580px;
   width: 40%;
 }
 
@@ -8,14 +14,17 @@
   background-color: azure;
   border-style: solid;
   border-radius: 5px;
-  height: 50px;
-  width: 300px;
+  font-size: 24pt;
+  font-weight: bold;
+  height: 80px;
+  width: 500px;
 }
 
 #title{
   font-size: 18pt;
   font-weight: bold;
 }
+
 
 .calc-buttons{
   background-color: white;
@@ -25,3 +34,13 @@
   height: 100px;
   width: 100%;  
 }
+
+.blue{
+  background-color: rgb(0, 70, 175);
+}
+
+
+.red{
+  background-color: rgb(196, 0, 0);
+}
+

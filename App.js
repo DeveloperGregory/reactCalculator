@@ -8,53 +8,52 @@ const Title = () => ({
   }
 });
 
-class Display extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      formula : ""
-    }
-  }
-  render(){
-    return (<div id='display' className='text-center'></div>)
-  }
-}
-
-class EntryBtns extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    return (<div id='the-buttons' className='row'>
-      <button id='clear' className='calc-buttons col-sm-9'>AC</button>
-      <button id='divide' className='calc-buttons col-sm-3'><i class="fas fa-divide"></i></button>
-      <button id='seven' className='calc-buttons col-sm-3'>7</button>
-      <button id='eight' className='calc-buttons col-sm-3'>8</button>
-      <button id='nine' className='calc-buttons col-sm-3'>9</button>
-      <button id='multiply' className='calc-buttons col-sm-3'>X</button>
-      <button id='four' className='calc-buttons col-sm-3'>4</button>
-      <button id='five' className='calc-buttons col-sm-3'>5</button>
-      <button id='six' className='calc-buttons col-sm-3'>6</button>
-      <button id='subtract' className='calc-buttons col-sm-3'>-</button>
-      <button id='one' className='calc-buttons col-sm-3'>1</button>
-      <button id='two' className='calc-buttons col-sm-3'>2</button>
-      <button id='three' className='calc-buttons col-sm-3'>3</button>
-      <button id='add' className='calc-buttons col-sm-3'>+</button>
-      <button id='zero' className='calc-buttons col-sm-6'>0</button>
-      <button id='decimal' className='calc-buttons col-sm-3'>.</button>
-      <button id='equals' className='calc-buttons col-sm-3'>=</button>
-    </div>)
-  }
-}
-
 class Calculator extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      display: ""
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.clearDisplay = this.clearDisplay.bind(this);
+  }
+  clearDisplay(){
+    this.setState({display: ""});
+  }
+  handleClick(input){
+    let newDisplay = ''
+    if(input == '='){
+      newDisplay = new Function('return ' + this.state.display)();
+      input = ""
+    }else{
+      newDisplay = this.state.display;
+    }
+    this.setState({display: newDisplay + input})
   }
   render(){
     return (<div id='calc-container' className='container'>
-      <Display />
-      <EntryBtns />
+      <div className='row'>
+        <div id='display' className='text-right col-sm-12'>{this.state.display}</div>
+      </div>
+      <div id='the-buttons' className='row'>
+        <button id='clear' className='calc-buttons col-sm-9 red' onClick={this.clearDisplay}>AC</button>
+        <button id='divide' className='calc-buttons col-sm-3 blue' onClick={() => {this.handleClick("/")}}><i class="fas fa-divide"></i></button>
+        <button id='seven' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("7")}}>7</button>
+        <button id='eight' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("8")}}>8</button>
+        <button id='nine' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("9")}}>9</button>
+        <button id='multiply' className='calc-buttons col-sm-3 blue' onClick={() => {this.handleClick("*")}}>X</button>
+        <button id='four' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("4")}}>4</button>
+        <button id='five' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("5")}}>5</button>
+        <button id='six' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("6")}}>6</button>
+        <button id='subtract' className='calc-buttons col-sm-3 blue' onClick={() => {this.handleClick("-")}}>-</button>
+        <button id='one' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("1")}}>1</button>
+        <button id='two' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("2")}}>2</button>
+        <button id='three' className='calc-buttons col-sm-3' onClick={() => {this.handleClick("3")}}>3</button>
+        <button id='add' className='calc-buttons col-sm-3 blue' onClick={() => {this.handleClick("+")}}>+</button>
+        <button id='zero' className='calc-buttons col-sm-6'onClick={() => {this.handleClick("0")}}>0</button>
+        <button id='decimal' className='calc-buttons col-sm-3' onClick={() => {this.handleClick(".")}}>.</button>
+        <button id='equals' className='calc-buttons col-sm-3 blue' onClick={() => {this.handleClick("=")}}>=</button>
+      </div>
     </div>)
   }
 }
@@ -70,3 +69,4 @@ function App() {
 }
 
 export default App;
+
