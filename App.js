@@ -24,7 +24,9 @@ class Calculator extends React.Component{
     let newDisplay = ''
     if(input == '='){
       newDisplay = new Function('return ' + this.state.display)();
-      input = ""
+      input = "";
+    }else if (this.state.display == 0 && input == 0){
+      input ="";
     }else{
       newDisplay = this.state.display;
     }
